@@ -73,7 +73,8 @@ const Index = () => {
         </form>
       </div>
       <div className={styles.rightPanel}>
-        <h1 className={styles.panelTitle}>Elektrik Kaçak Tespit Sistemi</h1>
+
+        <h1 className={styles.panelTitle}>Elektrik Kayıp-Kaçak Tespit Platformu</h1>
         <img src="/logo.svg" alt="Circle SVG" className={styles.svgImage} />
       </div>
     </div>
