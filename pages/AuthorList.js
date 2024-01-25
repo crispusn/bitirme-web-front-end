@@ -1,9 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 
 const AuthorList = ({ authors }) => {
   const itemsPerPage = 20;
   const [currentPage, setCurrentPage] = useState(1);
+  const [kacakDurumları, setKacakDurumları] = useState({});
+  const [randomIds, setRandomIds] = useState([]);
+
+  // Bu useEffect, bileşen ilk render olduğunda çalışır ve rastgele kimlikleri oluşturur.
+  useEffect(() => {
+    const ids = authors.map(() => generateRandomId());
+    setRandomIds(ids);
+  }, [authors]);
+
+  const toggleKacakDurumu = (authorId) => {
+    setKacakDurumları((prevKacakDurumları) => ({
+      ...prevKacakDurumları,
+      [authorId]: !prevKacakDurumları[authorId],
+    }));
+  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -23,11 +38,17 @@ const AuthorList = ({ authors }) => {
         currentAuthors.map((a, i) => (
           <div key={i}>
             <div className={styles.rows}>
-              <div>{generateRandomId()}</div>
+              <div>{randomIds[i]}</div>
               <div>{a._Il}</div>
               <div>{a._Ilce}</div>
               <div>{a._Kacak_Olma_Ihtimali}</div>
-              <div>Kontrol</div>
+              <div onClick={() => toggleKacakDurumu(a.id)}>
+                {kacakDurumları[a.id] ? (
+                  <img src="/tick.svg" alt="Circle SVG" height={20} width={20} />
+                ) : (
+                  <img src="/cross.svg" alt="Circle SVG" height={20} width={20} />
+                )}
+              </div>
             </div>
           </div>
         ))}

@@ -9,7 +9,7 @@ import { useApolloClient } from "@apollo/client";
 
 const QUERY = gql`
   query {
-    kacak_verileri_deneme {
+    kacak_elektrik_ihtimalleri {
       _Il
       _Ilce
       _Kacak_Olma_Ihtimali
@@ -29,7 +29,7 @@ const Home = () => {
   const [myData, setMyData] = useState([]);
   useEffect(() => {
     if (data)
-      setMyData(data.kacak_verileri_deneme)
+      setMyData(data.kacak_elektrik_ihtimalleri)
   }, [data])
   return (
 
@@ -69,7 +69,7 @@ const Home = () => {
         <div className={styles.column}>Abone No</div>
         <div className={styles.column}>İl</div>
         <div className={styles.column}>İlçe</div>
-        <div className={styles.column}>Kaçak Olma İhtimali</div>
+        <div className={styles.column}>Kaçak Olma İhtimali (%)</div>
         <div className={styles.column}>Kaçak Durumu</div>
       </div>
 
