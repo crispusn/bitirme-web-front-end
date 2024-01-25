@@ -1,6 +1,6 @@
 import { useQuery, gql, useLazyQuery } from "@apollo/client";
-import AuthorList from "./AuthorList";
 import withApollo from "../config";
+import DataList from "../components/DataList.js";
 import React, { useEffect, useState } from "react";
 import styles from '../styles/Home.module.css';
 import { useApolloClient } from "@apollo/client";
@@ -21,7 +21,13 @@ const QUERY = gql`
 const Home = () => {
   const { data, loading, error, refetch } = useQuery(QUERY);
   const [selectedValue, setSelectedValue] = useState('');
-
+  const [kacakDurumları, setKacakDurumları] = useState({});
+  const toggleKacakDurumu = (authorId) => {
+    setKacakDurumları((prevKacakDurumları) => ({
+      ...prevKacakDurumları,
+      [authorId]: !prevKacakDurumları[authorId],
+    }));
+  };
   // const client = useApolloClient();
   const handleDropdownChange = (e) => {
     setSelectedValue(e.target.value);
@@ -75,7 +81,7 @@ const Home = () => {
 
 
 
-      <AuthorList authors={myData ? myData : []} />
+      <DataList authors={myData ? myData : []} />
 
 
     </div>
