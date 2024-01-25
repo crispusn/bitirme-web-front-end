@@ -6,12 +6,11 @@ const DataList = ({ authors }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [kacakDurumları, setKacakDurumları] = useState({});
     const [randomIds, setRandomIds] = useState([]);
+    const [previousPageIds, setPreviousPageIds] = useState([]);
 
-    // Bu useEffect, bileşen ilk render olduğunda çalışır ve rastgele kimlikleri oluşturur.
     useEffect(() => {
-        const ids = authors.map(() => generateRandomId());
-        setRandomIds(ids);
-    }, [authors]);
+        generateRandomIds();
+    }, [currentPage, authors]);
 
     const toggleKacakDurumu = (authorId) => {
         setKacakDurumları((prevKacakDurumları) => ({
@@ -26,6 +25,12 @@ const DataList = ({ authors }) => {
 
     const generateRandomId = () => {
         return Math.floor(10000000 + Math.random() * 90000000).toString();
+    };
+
+    const generateRandomIds = () => {
+        const ids = currentAuthors.map(() => generateRandomId());
+        setPreviousPageIds(randomIds);
+        setRandomIds(ids);
     };
 
     const paginate = (pageNumber) => {
@@ -53,9 +58,9 @@ const DataList = ({ authors }) => {
                     </div>
                 ))}
 
-            <div className={styles.pagination}>
+            <div>
                 {Array.from({ length: Math.ceil(authors.length / itemsPerPage) }, (_, i) => (
-                    <button key={i} onClick={() => paginate(i + 1)}>
+                    <button className={styles.pagination} key={i} onClick={() => paginate(i + 1)}>
                         {i + 1}
                     </button>
                 ))}

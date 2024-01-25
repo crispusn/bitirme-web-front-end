@@ -100,7 +100,7 @@
 
 .rightPanel {
   flex: 1.4;
-  background-color: #925FE2;
+  background-color: #A471FB;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +137,7 @@
 .loginForm button {
   width: 100%;
   padding: 10px;
-  background-color: #925FE2;
+  background-color: #A471FB;
   color: #fff;
   border: none;
   border-radius: 12px;
@@ -172,5 +172,11 @@
   font-size: 36px;
   margin: 0;
   ;
+
+}
+
+.pagination {
+  margin: 2px 0px 0px;
+  color: #A471FB;
 
 }

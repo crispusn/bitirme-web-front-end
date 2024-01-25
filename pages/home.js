@@ -4,7 +4,8 @@ import DataList from "../components/DataList.js";
 import React, { useEffect, useState } from "react";
 import styles from '../styles/Home.module.css';
 import { useApolloClient } from "@apollo/client";
-
+import Modal from 'react-modal';
+import { Oval } from "react-loader-spinner";
 
 
 const QUERY = gql`
@@ -19,7 +20,33 @@ const QUERY = gql`
 `;
 
 const Home = () => {
-  const { data, loading, error, refetch } = useQuery(QUERY);
+  const [isOpen, setIsOpen] = useState(false)
+  const [loading, setLoading] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+
+      setIsOpen(false);
+    }, 15000);
+  };
+  const customStyles = {
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.6)'
+    },
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  }
+  const { data, error, refetch } = useQuery(QUERY);
   const [selectedValue, setSelectedValue] = useState('');
   const [kacakDurumları, setKacakDurumları] = useState({});
   const toggleKacakDurumu = (authorId) => {
@@ -47,6 +74,20 @@ const Home = () => {
           <option value="option1">Konak</option>
 
         </select>
+        <div>
+          <button onClick={openModal}>Verileri Güncelle</button>
+          <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} style={customStyles}>
+            <Oval
+              visible={true}
+              height="140"
+              width="140"
+              color="#A471FB"
+              ariaLabel="oval-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </Modal>
+        </div>
         <div className={styles.dropdownBtns}> <button onClick={(e) => {
           e.preventDefault()
           refetch()
@@ -66,9 +107,7 @@ const Home = () => {
         }}> Verileri İşle </button>
 
         </div>
-        <div className={styles.dropdownBtns}> <button > Verileri Güncelle </button>
 
-        </div>
       </div>
 
       <div className={styles.columns}>
