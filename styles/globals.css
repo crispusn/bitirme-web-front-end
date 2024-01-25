@@ -7,3 +7,8 @@ body {
   background-color: #050C13;
 
 }
+
+button:focus {
+  border: none;
+  outline: none;
+}

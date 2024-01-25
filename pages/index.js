@@ -22,7 +22,7 @@ const Index = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL, {
+      const response = await axios.post('https://bitirme-projesi-back-end.onrender.com/user/deneme', {
         username: formData.username,
         password: formData.password,
 
