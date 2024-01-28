@@ -31,7 +31,7 @@ const Home = () => {
       setLoading(false);
 
       setIsOpen(false);
-    }, 15000);
+    }, 60000);
   };
   const customStyles = {
     overlay: {
