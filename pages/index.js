@@ -22,7 +22,7 @@ const Index = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://bakircay-bitirme-4c3387ca00ea.herokuapp.com/user/deneme', {
+      const response = await axios.post('https://bitirme-projesi-back-end.onrender.com/user/deneme', {
         username: formData.username,
         password: formData.password,
 
